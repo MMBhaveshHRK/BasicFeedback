@@ -1,0 +1,8 @@
+C:\>cd "C:\Users\JNTUK UCEK\OneDrive\Desktop\FastAPI_Feedback_Form\sqlite-tools\sqlite-tools-win32-x86-3420000"
+
+C:\Users\JNTUK UCEK\OneDrive\Desktop\FastAPI_Feedback_Form\sqlite-tools\sqlite-tools-win32-x86-3420000>sqlite3.exe "C:\Users\JNTUK UCEK\OneDrive\Desktop\FastAPI_Feedback_Form\feedback.db"
+
+commands:
+ .tables
+.schema feedback
+ SELECT * FROM feedback;
