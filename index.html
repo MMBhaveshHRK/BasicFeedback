@@ -1,50 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Feedback Form</title>
-  <link rel="stylesheet" href="/static/style.css"> 
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: lightblue;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .form-container {
+      background-color: #fff;
+      margin-top: 50px;
+      padding: 30px 40px;
+      width: 600px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      color: #202124;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #202124;
+      font-weight: 500;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    .radio-group {
+      margin-bottom: 20px;
+    }
+    input[type="submit"] {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background-color: #155ab6;
+    }
+    .success-message {
+      color: green;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      display: none; /* hide by default */
+    }
+  </style>
 </head>
 <body>
   <div class="form-container">
     <h1>Feedback Form</h1>
 
-    {% if request.query_params.get('submitted') == 'true' %}
-      <p class="success-message">Thank you for your feedback!</p>
-    {% endif %}
+    <p class="success-message" id="successMsg">Thank you for your feedback!</p>
 
-    <form method="post" action="/feedback">
+    <form method="post" action="/feedback" id="feedbackForm">
       <label for="name">Client Name:</label>
-      <input type="text" id="name" name="name" required>
+      <input type="text" id="name" name="name" required />
 
       <label for="CName">Company Name (Optional):</label>
-      <input type="text" id="CName" name="CName">
+      <input type="text" id="CName" name="CName" />
 
       <label for="email">Email Address:</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" required />
 
       <label for="service">Service/Product Used:</label>
-      <input type="text" id="service" name="service" required>
+      <input type="text" id="service" name="service" required />
 
       <label for="satisfaction">Overall Satisfaction (1-5):</label>
-      <input type="number" id="satisfaction" name="satisfaction" min="1" max="5" required>
+      <input type="number" id="satisfaction" name="satisfaction" min="1" max="5" required />
 
       <div class="radio-group">
         <label>Was the service delivered on time?</label>
-        <input type="radio" id="onTimeYes" name="onTime" value="yes" required>
-        <label for="onTimeYes">Yes</label><br>
-        <input type="radio" id="onTimeNo" name="onTime" value="no">
+        <input type="radio" id="onTimeYes" name="onTime" value="yes" required />
+        <label for="onTimeYes">Yes</label><br />
+        <input type="radio" id="onTimeNo" name="onTime" value="no" />
         <label for="onTimeNo">No</label>
       </div>
 
       <label for="communication">Rate our communication (1-5):</label>
-      <input type="number" id="communication" name="communication" min="1" max="5" required>
+      <input type="number" id="communication" name="communication" min="1" max="5" required />
 
       <div class="radio-group">
         <label>Would you recommend us?</label>
-        <input type="radio" id="recommendYes" name="recommend" value="yes" required>
-        <label for="recommendYes">Yes</label><br>
-        <input type="radio" id="recommendNo" name="recommend" value="no">
+        <input type="radio" id="recommendYes" name="recommend" value="yes" required />
+        <label for="recommendYes">Yes</label><br />
+        <input type="radio" id="recommendNo" name="recommend" value="no" />
         <label for="recommendNo">No</label>
       </div>
 
@@ -57,8 +128,29 @@
       <label for="comments">Additional Comments:</label>
       <textarea id="comments" name="comments"></textarea>
 
-      <input type="submit" value="Submit Feedback">
+      <input type="submit" value="Submit Feedback" />
     </form>
   </div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // prevent actual submit for demo purpose
+
+      // Here you would normally submit via fetch/ajax or backend form submit,
+      // but for inline demo we simulate success:
+
+      // Hide the form
+      form.style.display = 'none';
+
+      // Show the success message
+      successMsg.style.display = 'block';
+
+      // If you want to actually submit the form to backend,
+      // remove event.preventDefault() and handle backend redirect/response.
+    });
+  </script>
 </body>
 </html>
